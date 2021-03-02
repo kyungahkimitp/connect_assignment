@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Party Invitation</title>
+        <script type="text/javascript">
+        
+            var messages = null;
+            var click = null;
+            var text = null;
+            // var text = '{"names":[' +
+            //             '{"Amber" },' +
+            //             '{"Bobby" },' +
+            //             '{"Donald" }]}';
+
+
+            window.addEventListener('load', function(){
+                messages = document.getElementById('messages');
+                click = document.getElementById('click');
+                click.addEventListener('click', sendData);
+                text = document.getElementById('text');
+                
+            });
+
+            function sendData(){
+                fetch('/formdata?messages='+messages.value)
+                .then(response => response.json())
+                .then(data => populateMessages(data));
+            }
+        
+            function populateMessages(newMessages) {
+                messages.innerHTML = "";
+                for (var i = 0; i < newMessages.length; i++)
+                {
+                    messages.innerHTML = messages.innerHTML + newMessages[i].text + "<br/>";
+                }
+                
+            }
+        </script>
+    </head>
+ <style>
+        h1 {text-align: center; font-size: 40px;}
+    
+    </style> 
+    <body>
+        <div id="messages">
+        <h1>Reviewing b-day messages</h1>
+        </div>
+        <form>
+            <label for="data">From:</label>
+            <input type="name" id="name" name="data" value="name">
+            <input type="button" id="click" name="click" value="Click">
+           
+        </form>
+
+       <body style="background-color: rgb(196, 236, 252);">
+   
+    </body>
+
+</html>
